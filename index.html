@@ -14,7 +14,15 @@
     </style>
     <script>
       // Initialize and add the map
-      function initMap() {
+      function getLocation() {
+          if(navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(initMap)
+          } else {
+              console.log("ngt gick fel.")
+          }
+      }
+
+      function initMap(position) {
         // The location of Uluru
         const uluru = { lat: -25.344, lng: 131.036 };
         // The map, centered at Uluru
@@ -32,6 +40,7 @@
   </head>
   <body>
     <h3>My Google Maps Demo</h3>
+    <button id="showMap" type="button" onclick="initMap()">PRESS ME</button>
     <!--The div element for the map -->
     <div id="map"></div>
 
