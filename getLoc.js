@@ -1,6 +1,9 @@
+import { getTime } from "./database";
+
 var a = {}
 var x = document.getElementById('demo');
 var y = document.getElementById('showMap')
+const c = {}
 
 var script = document.createElement('script')
 script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCDAsYZSff2DcSKB4OMcAqtxlK7B9ONhZw&callback=showPosition&libraries=&v=weekly'
@@ -18,7 +21,10 @@ function getLocation() {
 }
 
 function showPosition(position) {
-    const c = {lat: position.coords.latitude, lng: position.coords.longitude};
+    c['lat'] = position.coords.latitude;
+    c['lng'] = position.coords.longitude;
+    console.log(c['lat'] +" : "+ c['lng'])
+    //c = {lat: position.coords.latitude, lng: position.coords.longitude};
     var a = new google.maps.LatLng(c['lat'], c['lng'])
     var magProp = {
         zoom: 15,
@@ -29,4 +35,14 @@ function showPosition(position) {
         position: {lat: c['lat'], lng: c['lng']},
         map
     });
+    var d = new Date();
+    let time = d.today() + "@" + d.timeNow()
+    var jsonmsg = {
+        "id" : 1,
+        "latitude" : c['lat'],
+        "longitude" : c['lng'],
+        "time" : time
+    }
+
+    getTime(jsonmsg)
 }
