@@ -1,11 +1,48 @@
-/**
- * This file is just a silly example to show everything working in the browser.
- * When you're ready to start on your site, clear the file. Happy hacking!
- **/
+import { getTime } from './modules/database.js'
 
-import confetti from 'canvas-confetti';
+var a = {}
+var x = document.getElementById('demo');
+var y = document.getElementById('showMap')
+const c = {}
 
-confetti.create(document.getElementById('canvas'), {
-  resize: true,
-  useWorker: true,
-})({ particleCount: 200, spread: 200 });
+var script = document.createElement('script')
+script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCDAsYZSff2DcSKB4OMcAqtxlK7B9ONhZw&callback=showPosition&libraries=&v=weekly'
+script.async = true;
+
+y.addEventListener('click', getLocation())
+
+document.head.appendChild(script)
+function getLocation() {
+    if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    c['lat'] = position.coords.latitude;
+    c['lng'] = position.coords.longitude;
+    console.log(c['lat'] +" : "+ c['lng'])
+    //c = {lat: position.coords.latitude, lng: position.coords.longitude};
+    var a = new google.maps.LatLng(c['lat'], c['lng'])
+    var magProp = {
+        zoom: 15,
+        center: a
+    };
+    map = new google.maps.Map(document.getElementById('map'), magProp);
+    new google.maps.Marker({
+        position: {lat: c['lat'], lng: c['lng']},
+        map
+    });
+    var d = new Date();
+    let time = d.today() + "@" + d.timeNow()
+    var jsonmsg = {
+        "id" : 1,
+        "latitude" : c['lat'],
+        "longitude" : c['lng'],
+        "time" : time
+    }
+
+    getTime(jsonmsg)
+}

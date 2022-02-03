@@ -1,4 +1,7 @@
-const mysql = require("mysql")
+'use strict'
+import { createRequire } from 'module';
+const require = createRequire('require')
+const mysql = require('mysql')
 
 //CREATE CONNECTION 
 const db = mysql.createConnection({

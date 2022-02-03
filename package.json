@@ -1,13 +1,14 @@
 {
   "scripts": {
-    "start": "snowpack dev",
+    "start": "node index.js",
     "build": "snowpack build",
     "test": "echo \"This template does not include a test runner by default.\" && exit 1",
     "format": "prettier --write \"src/**/*.js\"",
     "lint": "prettier --check \"src/**/*.js\""
   },
   "dependencies": {
-    "canvas-confetti": "^1.2.0"
+    "canvas-confetti": "^1.2.0",
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
     "prettier": "^2.2.1",
