@@ -1,4 +1,4 @@
-import { getTime } from './modules/database.js'
+'use strict'
 
 var a = {}
 var x = document.getElementById('demo');
@@ -36,7 +36,7 @@ function showPosition(position) {
         map
     });
     var d = new Date();
-    let time = d.today() + "@" + d.timeNow()
+    time = d;
     var jsonmsg = {
         "id" : 1,
         "latitude" : c['lat'],
@@ -44,5 +44,5 @@ function showPosition(position) {
         "time" : time
     }
 
-    getTime(jsonmsg)
+    console.log(jsonmsg)
 }
