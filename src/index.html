@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add Map</title>
+
+    <style type="text/css">
+      /* Set the size of the div element that contains the map */
+      #map {
+        height: 400px;
+        /* The height is 400 pixels */
+        width: 100%;
+        /* The width is the width of the web page */
+      }
+    </style>
+  </head>
+  <body>
+    <h3>My Google Maps Demo</h3>
+    <form id="test" action="/send" method="POST">
+    </form>
+    <input type="button" onclick="postForm()" value="Klicka här">
+
+    <p id="demo"></p>
+    <div id="map"></div>
+  </body>
+  <script type="text/javascript">
+    var c = {};
+    async function postForm() {
+      getLoc()
+    }
+
+    async function getLoc() {
+      if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(await showPos)
+      }
+    }
+
+    async function showPos(position) {
+      var form = document.createElement("form");
+        form.setAttribute("method", "POST");
+        form.setAttribute("action", "/send")
+        var lat = document.createElement("input");
+        lat.setAttribute("type", "text")
+        lat.setAttribute("name", "lat")
+        lat.setAttribute("value", position.coords.latitude)
+        form.appendChild(lat)
+        var long = document.createElement("input");
+        long.setAttribute("type", "text")
+        long.setAttribute("name", "long")
+        long.setAttribute("value", position.coords.longitude)
+        form.appendChild(long)
+        var time = document.createElement("input");
+        time.setAttribute("type", "text")
+        time.setAttribute("name", "time")
+        time.setAttribute("value", position.timestamp)
+        form.appendChild(time)
+        document.body.appendChild(form)
+        form.submit();
+    }
+  </script>
+  
+</html>
