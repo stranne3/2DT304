@@ -1,0 +1,57 @@
+body {
+    background-color: white;
+    margin: 0%;
+}
+
+header {
+    position: relative;
+    z-index: 50;
+    background-color: #fff;
+    height: 70px;
+}
+
+.tester {
+    display: block;
+    height: 100px;
+    margin: 0%;
+}
+
+#chartButton {
+    background-image: url("/images/chartIcon.jpeg");
+    background-size: 70px 70px;
+    background-repeat: no-repeat;
+    height: 70px;
+    width: 70px;
+    border: none;
+    float: left;
+}
+
+#mapButton {
+    background-image: url("/images/mapIcon.jpg");
+    background-size: 70px 70px;
+    background-repeat: no-repeat;
+    height: 70px;
+    width: 70px;
+    border: none;
+    float: left;
+}
+
+#mapButton:hover {
+    background-image: url("/images/invMapIcon.jpg");
+}
+
+#chartButton:hover {
+    background-image: url("/images/invChartIcon.jpeg");
+}
+
+#sendLocation {
+    background-color: #4caf50;
+    color: white;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 16px;
+}
+
+#sendLocation:hover {
+    cursor: pointer;
+}

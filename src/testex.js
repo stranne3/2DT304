@@ -20,10 +20,41 @@ app.get("/", function(req, res) {
     console.log(__dirname + '/index.html')
 })
 
-app.post('/send', (req, res) => {
+app.get("/css/index.css", function(req, res) {
+    res.sendFile(__dirname + "/css/index.css")
+
+})
+
+app.get("/images/chartIcon.jpeg", function(req, res) {
+    res.sendFile(__dirname + "/images/chartIcon.jpeg")
+})
+
+app.get("/images/invChartIcon.jpeg", function(req, res) {
+    res.sendFile(__dirname + "/images/invChartIcon.jpeg")
+})
+
+app.get("/images/mapIcon.jpg", function(req, res) {
+    res.sendFile(__dirname + "/images/mapIcon.jpg")
+})
+
+app.get("/images/invMapIcon.jpg", function(req, res) {
+    res.sendFile(__dirname + "/images/invMapIcon.jpg")
+})
+
+app.get("/map", function(req, res) {
+    res.sendFile(__dirname + "/map.html")
+})
+
+app.get("/charts", function(req, res) {
+    console.log(req.url)
+    res.sendFile(__dirname + "/charts.html")
+})
+
+app.post('/', (req, res) => {
     const click = {clickTime: new Date()};
+    res.status(204).send();
     console.log(req.body)
-    res.redirect("/")
+    //res.redirect("/")
 })
 
 app.listen(3000, function () {
