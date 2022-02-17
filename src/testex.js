@@ -33,6 +33,18 @@ app.get("/images/invChartIcon.jpeg", function(req, res) {
     res.sendFile(__dirname + "/images/invChartIcon.jpeg")
 })
 
+app.get("/images/mapIcon.jpg", function(req, res) {
+    res.sendFile(__dirname + "/images/mapIcon.jpg")
+})
+
+app.get("/images/invMapIcon.jpg", function(req, res) {
+    res.sendFile(__dirname + "/images/invMapIcon.jpg")
+})
+
+app.get("/map", function(req, res) {
+    res.sendFile(__dirname + "/map.html")
+})
+
 app.get("/charts", function(req, res) {
     console.log(req.url)
     res.sendFile(__dirname + "/charts.html")

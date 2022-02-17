@@ -23,6 +23,21 @@ header {
     height: 70px;
     width: 70px;
     border: none;
+    float: left;
+}
+
+#mapButton {
+    background-image: url("/images/mapIcon.jpg");
+    background-size: 70px 70px;
+    background-repeat: no-repeat;
+    height: 70px;
+    width: 70px;
+    border: none;
+    float: left;
+}
+
+#mapButton:hover {
+    background-image: url("/images/invMapIcon.jpg");
 }
 
 #chartButton:hover {
