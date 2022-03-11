@@ -19,4 +19,3 @@ do
     node testtest.js
     sleep 60
 done
-
