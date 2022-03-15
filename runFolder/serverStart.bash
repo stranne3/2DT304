@@ -8,7 +8,7 @@ cd $root/src
 
 echo "Inside dir: " "$(pwd)"
 
-node testex.js &
+node server.js &
 cd $root 
 echo "Back to dir:" "$(pwd)"
 
@@ -16,6 +16,6 @@ while :
 do
     now=$(date)
     echo "Running fetch at time: " "$now"
-    node testtest.js
+    node handleData.js
     sleep 60
 done
