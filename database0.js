@@ -26,11 +26,11 @@ const db = getDatabase();
 await writeData()
 
 async function writeData() {
-    update(ref(db, "2022-02-11"), {
+    update(ref(db, "2022-03-15"), {
       "0600": {
         "value": 4
       }
     }).then(
-      exit(1)
+      console.log("KLAR")
     )
 }
