@@ -1,6 +1,6 @@
 import fetch from 'node-fetch'
 import {initializeApp} from 'firebase/app'
-import { getDatabase, onDisconnect, push, ref, set, update } from "firebase/database";
+import { getDatabase, onDisconnect, orderByKey, push, ref, set, update } from "firebase/database";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB0ACKYz6CovM3yRIgoonh-3iztDq3gFRg",
@@ -34,15 +34,14 @@ fetch("https://eu1.cloud.thethings.network/api/v3/as/applications/esp32counterfi
     var stringObjects = data.split("\n")
     savePayloadAsJson(stringObjects) 
     var j = JSON.parse(stringObjects[0])
-    console.log(j)
-    console.log(j.result.uplink_message.decoded_payload)
 })
 .catch(error => console.log(error))
 
 async function middleHand(date, message){
     var jsonMessage = JSON.parse(message)
-    await writeData(date, jsonMessage)
+    //await writeData(date, jsonMessage)
 }
+
 async function writeData(date, jsonMessage) {
 
     update(ref(db, date), jsonMessage)
@@ -53,7 +52,7 @@ async function writeData(date, jsonMessage) {
 // Detta gör att varje result blir JSON --> vi kan hämta ut data!
 function savePayloadAsJson(stringObjects) {
     var payloadAsJson = []
-    for(var i = 2; i < 10; i++) {
+    for(var i = 0; i < stringObjects.length; i++) {
         try{
             var objObjects = JSON.parse(stringObjects[i])
             if(objObjects.result.uplink_message.decoded_payload !== undefined) {
@@ -64,19 +63,20 @@ function savePayloadAsJson(stringObjects) {
                 var t = paxDateAndTime[1]
                 t = t.slice(0, 5)
                
-                var m = "{ \"" + t.toSting() + "\" : {\"value\" : "+ paxCount +" }}"
+                var m = "{ \"" + t.toString() + "\" : {\"value\" : "+ paxCount +" }}"
                 payloadAsJson.push(JSON.parse(m))
 
-                break
-
-                //middleHand(date, m)
-
-                //middleHand(date.toString(), time.toString(), paxCount.toString()) //Här måste vi ändra så att vi skriver in paxcounterns värde.
             }
         }catch(error) {
             
         }
     }
+    sendToFirebase(date, payloadAsJson)
+}
 
-    console.log(payloadAsJson)
+function sendToFirebase(date, payloadAsJson){
+    for(var i = 0; i < payloadAsJson.length; i++){
+        console.log(payloadAsJson[i])
+        writeData(date, payloadAsJson[i])
+    }
 }
