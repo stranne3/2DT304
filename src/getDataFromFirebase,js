@@ -1,0 +1,22 @@
+import fetch from 'node-fetch'
+import {initializeApp} from 'firebase/app'
+import { child, get, getDatabase, onDisconnect, orderByKey, push, ref, set, update} from "firebase/database";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyB0ACKYz6CovM3yRIgoonh-3iztDq3gFRg",
+    authDomain: "paxcounter-7b526.firebaseapp.com",
+    projectId: "paxcounter-7b526",
+    storageBucket: "paxcounter-7b526.appspot.com",
+    messagingSenderId: "38327586179",
+    appId: "1:38327586179:web:95b407d47ea9514e16bab6",
+    measurementId: "G-N4FWD59FRY"
+  }
+
+const app = initializeApp(firebaseConfig)
+const db = getDatabase();
+
+getData()
+
+function getData(){
+    ref.once()
+}
