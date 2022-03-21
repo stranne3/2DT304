@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" name="viewport" content="width=device-width">
+    <title>Crowding in exercise tracks</title>
+    <link type="text/css" href="css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <div class="topnav">
+      <a>Home</a>
+      <a>Statistics</a>
+      <a>Location</a>
+    </div>
+    <div class="sidenav" style="width:70px">
+        <a href="/about" class="w3-bar-item w3-button"><i class="fa fa-info-circle fa-2x "></i></a>
+        <a href="/charts" class="w3-bar-item w3-button"><i class="fa fa-bar-chart fa-2x"></i></a>
+        <a href="/map" class="w3-bar-item w3-button"><i class="fa fa-location-arrow fa-2x"></i></a>
+        <a href="#" class="w3-bar-item w3-button"><i class="fa fa-globe fa-2x"></i></a>
+      </div>
+    
+    <header class="top_header">
+      <div class="header_nav">
+        <form action="/" method="get">
+          <button id="husButton" type="submit" title="hus"></button>
+        </form>
+
+          <form action="/charts" method="get">
+            <button id="chartButton" type="submit" title="charts"></button>
+          </form>
+
+          <form action="/map" method="get">
+            <button id="mapButton" type="submit" title="map"></button>
+          </form>
+        </div>
+    </header>
+    <div class="textCenter">
+      <h2>About this web page</h2>
+      <p>This web page will give you information about the exercise tracks around Teleborg<br>
+         It will also give you an option to help improve these tracks by pressing a button when you feel unsafe,<br>
+         or see something that can be improved in the tracks so that Växjö municipality can come out to the track and fix this. </p>
+    </div>
+    <p id="userInfo"></p>
+  </body>
+<div class="footer">
+  <p>© Copyright 2022, Emil Dalin-Volsing, Enida Ahmic and Viktor Stranne Last updated on 13 Mar 2022.</p>
+</div>
+  
+</html>
