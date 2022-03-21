@@ -15,7 +15,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 const db = getDatabase();
 
-fetch("https://eu1.cloud.thethings.network/api/v3/as/applications/esp32counterfinal/devices/eui-70b3d57ed004c890/packages/storage/uplink_message", {
+fetch("https://eu1.cloud.thethings.network/api/v3/as/applications/esp32counterfinal/devices/eui-70b3d57ed004c3ea/packages/storage/uplink_message", {
     method: "GET",
     headers: {
         'Authorization' : "Bearer NNSXS.27TPAT5ESMNGWEGOZUGPGCTZLK6AIV3JQB24FWY.RZ3MTBC3BD6W3IOFLJLT5WRVQIDFNX6A4E7JGAQOIRXFB5ABSCRQ",
@@ -35,11 +35,6 @@ fetch("https://eu1.cloud.thethings.network/api/v3/as/applications/esp32counterfi
     savePayloadAsJson(stringObjects) 
 })
 .catch(error => console.log(error))
-
-async function middleHand(date, message){
-    var jsonMessage = JSON.parse(message)
-    //await writeData(date, jsonMessage)
-}
 
 async function writeData(date, jsonMessage) {
 
@@ -75,7 +70,6 @@ function savePayloadAsJson(stringObjects) {
 
 function sendToFirebase(date, payloadAsJson){
     for(var i = 0; i < payloadAsJson.length; i++){
-        console.log(payloadAsJson[i])
         writeData(date, payloadAsJson[i])
     }
 }

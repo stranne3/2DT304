@@ -1,5 +1,4 @@
 {
-  "type": "module",
   "scripts": {
     "start": "snowpack dev",
     "build": "snowpack build",
