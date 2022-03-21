@@ -1,6 +1,6 @@
 import fetch from 'node-fetch'
 import {initializeApp} from 'firebase/app'
-import { get, getDatabase, onDisconnect, orderByKey, push, ref, set, update } from "firebase/database";
+import { getDatabase, ref, update } from "firebase/database";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB0ACKYz6CovM3yRIgoonh-3iztDq3gFRg",
@@ -32,7 +32,7 @@ fetch("https://eu1.cloud.thethings.network/api/v3/as/applications/esp32counterfi
 })
 .then(data =>{
     var stringObjects = data.split("\n")
-    //savePayloadAsJson(stringObjects) 
+    savePayloadAsJson(stringObjects) 
 })
 .catch(error => console.log(error))
 
