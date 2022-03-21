@@ -42,6 +42,10 @@ app.get("/images/invMapIcon.jpg", function(req, res) {
     res.sendFile(__dirname + "/images/invMapIcon.jpg")
 })
 
+app.get("/images/logo.jpeg", function(req, res) {
+    res.sendFile(__dirname + "/images/logo.jpeg")
+})
+
 app.get("/images/hus.jpg", function(req, res) {
     res.sendFile(__dirname + "/images/hus.jpg")
 })
@@ -58,6 +62,10 @@ app.get("/images/bakgrund.jpg", function(req, res) {
     res.sendFile(__dirname + "/images/bakgrund.jpg")
 })
 
+app.get("/images/husTrans.png", function(req, res) {
+    res.sendFile(__dirname + "/images/husTrans.png")
+})
+
 app.get("/map", function(req, res) {
     res.sendFile(__dirname + "/map.html")
 })
@@ -65,6 +73,11 @@ app.get("/map", function(req, res) {
 app.get("/charts", function(req, res) {
     console.log(req.url)
     res.sendFile(__dirname + "/charts.html")
+})
+
+app.get("/about", function(req, res) {
+    console.log(req.url)
+    res.sendFile(__dirname + "/about.html")
 })
 
 app.get("/getdata.js", function(req, res){
