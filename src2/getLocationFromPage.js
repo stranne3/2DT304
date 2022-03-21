@@ -1,6 +1,6 @@
 var counter = 0;
 function setUp(long, lat){
-var m = "{ \""+ counter.toString() +"\" : { \"lat\": \""+ lat.toString() + "\", \"long\": \"" + long.toString()+ "\"}}";
+var m = "{ \"lat\": \""+ lat.toString() + "\", \"long\": \"" + long.toString()+ "\"}";
   var msg = JSON.parse(m)
   const firebaseConfig = {
     apiKey: "AIzaSyBReXdAg-leJH7k3gd5M8dHRxs_YqX-i7E",
@@ -24,11 +24,22 @@ var m = "{ \""+ counter.toString() +"\" : { \"lat\": \""+ lat.toString() + "\", 
     const db = firebaseDatabase.getDatabase()
     console.log("i firebase")
 
-    firebaseDatabase.runTransaction(firebaseDatabase.ref(db), (current_value) => {
-      return (current_value || 0) +1
+    await firebaseDatabase.get(firebaseDatabase.ref(db)).then((snapshot) => {
+      return snapshot.val()
+    }).then(data => {
+      if(data === null){
+        firebaseDatabase.update(firebaseDatabase.ref(db), {"0": msg})
+      } else {
+        var keys = Object.keys(data)
+        var lastKey = parseInt(keys[keys.length -1])
+        var nextKey = lastKey + 1
+        var newMsg = "{\""+ nextKey + "\" :" + m +"}" 
+        jsonMsg = JSON.parse(newMsg) 
+        firebaseDatabase.update(firebaseDatabase.ref(db), jsonMsg)
+      }
     })
 
-    firebaseDatabase.update(firebaseDatabase.ref(db), msg)
+    //firebaseDatabase.update(firebaseDatabase.ref(db), msg)
   })();
 }
 
