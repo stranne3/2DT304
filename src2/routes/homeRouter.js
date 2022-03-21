@@ -7,5 +7,5 @@ const homeController = require('../controllers/homeController')
 
 router.get('/', homeController.index)
 //router.post('/', homeController.indexPost)
-router.post('/', homeController.postPos)
+router.post('/postPos', homeController.postPos)
 module.exports = router
