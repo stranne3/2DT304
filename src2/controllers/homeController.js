@@ -12,9 +12,7 @@ const indexPost = (req, res) => {
 }
 
 const postPos = (req, res) => {
-    console.log(req.body.Enida)
     console.log("===================================HÄR")
-    print(req.body.Enida)
     res.render('home/index', {
         viewData : {
             lat : req.body.latitude,
