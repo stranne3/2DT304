@@ -35,7 +35,7 @@
         </div>
     </header>
     <h3>Motionsspår</h3>
-    <form action="/" method="post" id="tt">
+    <form action="/postPos" method="post" id="tt">
       <button id = "locBut" onclick="getLoc()">SEND</button>
       <input type="text" id ="latVal" hidden="true" name="latitude"/>
       <input type="text" id ="longVal" hidden="true" name="longitude"/>
@@ -44,6 +44,7 @@
     <script type="text/javascript">
     async function getLoc() {
       if(!navigator.geolocation) {
+        console.log("Not supported")
         alert("Geolocation is not supported by your browser")
       } else {
         navigator.geolocation.getCurrentPosition(await showPos, error)
@@ -67,14 +68,14 @@
         e.preventDefault();
       })
     }
+
     </script>
 
     {{#if viewData}}
-    <p>HÄR NU {{viewData.lat}}</p>
-    <p>long: {{viewData.long}}</p>
+      <p>latitude: {{viewData.lat}}</p>
+      <p>longitude: {{viewData.long}}</p>
     {{/if}}
 
-    <button id="sendLocation" onclick="postForm()">Klicka här</button>
     <p id="userInfo"></p>
   </body>
 <div class="footer">
