@@ -1,17 +1,11 @@
+const t = require('../getLocationFromPage')
+
 const index = (req, res) => {
     res.render('home/index')
 }
 
-const indexPost = (req, res) => {
-    res.render('home/index', {
-        viewData: {
-            viewData : "<p> här är jag </p>"
-        }
-    })
-}
-
 const postPos = (req, res) => {
-    console.log("===================================HÄR")
+    t.write(req.body.latitude, req.body.longitude)
     res.render('home/index', {
         viewData : {
             lat : req.body.latitude,
@@ -22,6 +16,5 @@ const postPos = (req, res) => {
 
 module.exports = { 
     index,
-    indexPost,
     postPos
 }
