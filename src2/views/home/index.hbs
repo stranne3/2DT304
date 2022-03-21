@@ -48,7 +48,6 @@
         alert("Geolocation is not supported by your browser")
       } else {
         navigator.geolocation.getCurrentPosition(await showPos, error)
-        console.log("Hej")
       }
     }
 
@@ -57,10 +56,8 @@
     }
 
     async function showPos(position) {
-      console.log("HÄR NU")
       var c = document.getElementById('latVal')
       var d = document.getElementById('longVal')
-      console.log("KOMMER HIT")
       c.setAttribute("value", position.coords.latitude)
       d.setAttribute("value", position.coords.longitude)
       submitForm()
