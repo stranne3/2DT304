@@ -15,17 +15,24 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 const db = getDatabase();
 
-getData()
+retreiveData()
 
-function getData(){
-    get(ref(db)).then((snapshot) => {
+async function retreiveData(){
+  var fixedData = await getData()
+  return fixedData
+}
+
+async function getData(){
+  var hoursAndValues
+    await get(ref(db)).then((snapshot) => {
       return snapshot.val()
     }).then(data => {
       var keys = Object.keys(data)
       var arrayWithDateAndHour = getArrayOfTime(keys, data)
-      var hoursAndValues = getDatesWithHourAndValues(arrayWithDateAndHour, data) //HÄR ÄR ALL SORTERAD DATA
-      console.log(hoursAndValues)
+      hoursAndValues = getDatesWithHourAndValues(arrayWithDateAndHour, data) //HÄR ÄR ALL SORTERAD DATA
+      console.log("returnar")
     })
+    return hoursAndValues
 }
 
 function getDatesWithHourAndValues(arrayWithDateAndHour, data){
@@ -56,4 +63,8 @@ function getArrayOfTime(keys, dataObject){
     temp[keys[i]] = t
   }
   return temp
+}
+
+export {
+  retreiveData
 }

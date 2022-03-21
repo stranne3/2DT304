@@ -1,7 +1,6 @@
 import { createRequire } from "module";
 import { fileURLToPath } from "url";
 import path from "path";
-import req from "express/lib/request.js";
 
 const require = createRequire(import.meta.url)
 
