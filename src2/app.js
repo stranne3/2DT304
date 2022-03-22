@@ -16,6 +16,7 @@ app.use('/charts', require('./routes/chartRouter'))
 app.use('/getWeekData', require('./routes/graphRouter'))
 app.use('/about', require('./routes/aboutRouter'))
 app.use('/map', require('./routes/mapRouter'))
+app.use('/getMap', require('./routes/mapRouter'))
 app.use('/postPos', require('./routes/homeRouter'))
 
 app.listen(3000, () => console.log("Server2 running on port 3000"))
