@@ -38,9 +38,15 @@ var m = "{ \"lat\": \""+ lat.toString() + "\", \"long\": \"" + long.toString()+ 
 }
 
 async function write(lat, long){
+  console.log(lat)
+  console.log(long)
   try {
-    setUp(lat, long)
-    return "Successfully stored your location!"
+    if(lat !== undefined && long !== undefined){
+      setUp(lat, long)
+      return "Successfully stored your location!"
+    } else {
+      throw new Error
+    }
   } catch(error) {
     return "Could not store your location, try again!"
   }
