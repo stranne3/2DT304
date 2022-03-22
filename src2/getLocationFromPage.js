@@ -1,5 +1,4 @@
-var counter = 0;
-function setUp(long, lat){
+function setUp(lat, long){
 var m = "{ \"lat\": \""+ lat.toString() + "\", \"long\": \"" + long.toString()+ "\"}";
   var msg = JSON.parse(m)
   const firebaseConfig = {
@@ -16,13 +15,11 @@ var m = "{ \"lat\": \""+ lat.toString() + "\", \"long\": \"" + long.toString()+ 
   (async () => {
     firebaseApp = await import('firebase/app');
     const app = firebaseApp.initializeApp(firebaseConfig)
-    console.log("i database")
   })();
 
   (async () => {
     let firebaseDatabase = await import('firebase/database');
     const db = firebaseDatabase.getDatabase()
-    console.log("i firebase")
 
     await firebaseDatabase.get(firebaseDatabase.ref(db)).then((snapshot) => {
       return snapshot.val()
@@ -31,26 +28,21 @@ var m = "{ \"lat\": \""+ lat.toString() + "\", \"long\": \"" + long.toString()+ 
         firebaseDatabase.update(firebaseDatabase.ref(db), {"0": msg})
       } else {
         var keys = Object.keys(data)
-        var lastKey = parseInt(keys[keys.length -1])
-        var nextKey = lastKey + 1
+        var nextKey = parseInt(keys[keys.length -1]) + 1;
         var newMsg = "{\""+ nextKey + "\" :" + m +"}" 
         jsonMsg = JSON.parse(newMsg) 
         firebaseDatabase.update(firebaseDatabase.ref(db), jsonMsg)
       }
     })
-
-    //firebaseDatabase.update(firebaseDatabase.ref(db), msg)
   })();
 }
 
-async function write(long, lat){
-  console.log("TYP: ", typeof(long))
+async function write(lat, long){
   try {
-    setUp(long, lat)
-    counter += 1;
+    setUp(lat, long)
+    return "Successfully stored your location!"
   } catch(error) {
-    console.log("Något gick fel")
-    console.log(error)
+    return "Could not store your location, try again!"
   }
 }
 

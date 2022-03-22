@@ -6,5 +6,6 @@ const router = express.Router()
 const mapController = require('../controllers/mapController')
 
 router.get('/', mapController.index)
+router.post('/getMap', mapController.getMap)
 
 module.exports = router
