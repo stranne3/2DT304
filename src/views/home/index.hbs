@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" name="viewport" content="width=device-width">
+    <title>Crowding in exercise tracks</title>
+    <link type="text/css" href="css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+
+     <div class="sidenav" style="width:70px">
+    <a href="/" class="w3-bar-item w3-button" title="index"><i class="fa fa-home fa-2x "></i></a>
+    <a href="/charts" class="w3-bar-item w3-button" title="charts"><i class="fa fa-bar-chart fa-2x"></i></a>
+    <a href="/map" class="w3-bar-item w3-button" title="map"><i class="fa fa-location-arrow fa-2x"></i></a>
+    <a href="/about" class="w3-bar-item w3-button" title="about"><i class="fa fa-info-circle fa-2x"></i></a>
+  </div>
+    
+  <div id="motionsknapp">
+    <h3>Motionsspår</h3>
+    <form action="/postPos" method="post" id="tt">
+      <button id = "locBut" onclick="getLoc()">SEND</button>
+      <input type="text" id ="latVal" hidden="true" name="latitude"/>
+      <input type="text" id ="longVal" hidden="true" name="longitude"/>
+    </form>
+  </div>
+  {{#if viewData}}
+    <p>Server said: {{viewData.res}}</p>
+  {{/if}}
+  
+
+    <script type="text/javascript">
+    async function getLoc() {
+      if(!navigator.geolocation) {
+        console.log("Not supported")
+        alert("Geolocation is not supported by your browser")
+      } else {
+        navigator.geolocation.getCurrentPosition(await showPos, error)
+      }
+    }
+
+    function error() {
+      alert("Unable to retreive your location")
+    }
+
+    async function showPos(position) {
+      var c = document.getElementById('latVal')
+      var d = document.getElementById('longVal')
+      c.setAttribute("value", position.coords.latitude)
+      d.setAttribute("value", position.coords.longitude)
+      submitForm()
+    }
+
+    function submitForm(){
+      var d = document.getElementById('tt').submit(function(e) {
+        e.preventDefault();
+      })
+    }
+
+    </script>
+    <img src="/images/esp32BG.png">
+  </body>
+<div class="footer">
+  <p>© Copyright 2022, Emil Dalin-Volsing, Enida Ahmic and Viktor Stranne Last updated on 22 Mar 2022.</p>
+</div>
+  
+</html>

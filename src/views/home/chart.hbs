@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <meta charset="utf-8" name="viewport" content="width=device-width">
+    <title>Crowding in exercise tracks</title>
+    <link type="text/css" href="css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+  </head>
+  <body>
+
+     <div class="sidenav" style="width:70px">
+    <a href="/" class="w3-bar-item w3-button"><i class="fa fa-home fa-2x "></i></a>
+    <a href="/charts" class="w3-bar-item w3-button"><i class="fa fa-bar-chart fa-2x"></i></a>
+    <a href="/map" class="w3-bar-item w3-button"><i class="fa fa-location-arrow fa-2x"></i></a>
+    <a href="/about" class="w3-bar-item w3-button"><i class="fa fa-info-circle fa-2x"></i></a>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">Select timespan</button>
+      <div class="dropdown-content">
+        <form action="/getDayData" method="post">
+          <input type="submit" value="LAST DAY" name="graphButton">
+        </form>
+        <form action="/getWeekData" method="post">
+          <input type="submit" value="LAST 7 DAYS" name="graphButton">
+        </form>
+        <form action="/getMonthData" method="post">
+          <input type="submit" value="LAST MONTH" name="graphButton">
+        </form>
+      </div>
+    </div>
+
+    <div class="graph">
+      <canvas id ="myChart" width="800px" height="400px"></canvas>
+    </div>
+    {{#if viewData}}
+     <textarea hidden="true" id="source" onchange="addGraph({{viewData.res}}, {{viewData.t}})"></textarea>
+    {{/if}}
+    <script>
+      function test(){
+        console.log("KOM TILL TEST")
+      }
+      function graphDatas(y, x) {
+      // Our labels along the x-axis
+      new Chart(document.getElementById("myChart"), {
+        type: 'line',
+        data: {
+          labels: y,
+          label: "Time of day",
+          datasets: [
+            {
+              data: x,
+              label: "Amount of people"
+            }
+          ]
+        },
+        options: {
+          responsive: false
+        }
+      });
+    }
+    
+      function addGraph(data, type){
+        if(type[0] == 'day'){
+          var value = []
+          var date = Object.keys(data)
+          var hours = Object.keys(data[date])
+          for(var i = 0; i < hours.length; i++) {
+            value[i] = parseInt(data[date][hours[i]])
+            hours[i] = parseInt(hours[i])
+          }
+          graphDatas(hours, value)
+        } else if(type[0] == 'week'){
+            var dates = Object.keys(data)
+            var maxVal = []
+            var fixedDates = []
+            for(var i = 0; i < dates.length; i++) {
+              maxVal[i] = data[dates[i]]
+              fixedDates[i] = parseInt(dates[i].replaceAll('-', ''))
+            }
+            graphDatas(fixedDates, maxVal)
+          }
+      }
+          var hiddenElement = document.getElementById('source')
+          if(hiddenElement !== null){
+            var event = new Event('change')
+            hiddenElement.dispatchEvent(event)
+        }
+    </script>
+
+  </body>
+  <div class="footer">
+    <p>© Copyright 2022, Emil Dalin-Volsing, Enida Ahmic and Viktor Stranne Last updated on 13 Mar 2022.</p>
+  </div>
+</html>
